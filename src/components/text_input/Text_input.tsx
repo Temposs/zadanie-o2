@@ -14,6 +14,7 @@ import { Typography } from "../Typohraphy";
 export function Text_input(props: {
   value?: string;
   error?: boolean;
+  warning?: boolean;
   multiline?: boolean;
   name?: string;
   required?: boolean;
@@ -33,17 +34,17 @@ export function Text_input(props: {
       HTMLTextAreaElement
     >;
 }) {
-  const [value, set_value] = useState(props.value);
+  const [value, set_value] = useState(props.value || "");
   const theme = useTheme();
   const [is_hovering, set_is_hovering] = useState(false);
   const [is_focusing, set_is_focusing] = useState(false);
 
   useEffect(() => {
-    set_value(props.value);
+    set_value(props.value || "");
   }, [props.value]);
 
   useEffect(() => {
-    if (value === props.value) return;
+    if (value === (props.value || "")) return;
     props.on_change(value);
   }, [value]);
 
